@@ -1,0 +1,12 @@
+# Environment variables (API Keys)
+.env
+*.env
+
+# Dependencies
+node_modules/
+backend/venv/
+backend/__pycache__/
+
+# Vite / Build outputs
+frontend/dist/
+.DS_Store

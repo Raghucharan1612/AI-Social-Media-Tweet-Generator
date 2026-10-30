@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme { --font-sans: "Inter", "Avenir Next", ui-sans-serif, system-ui, sans-serif; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+button, input, textarea { font: inherit; }
