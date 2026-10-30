@@ -1,9 +1,24 @@
 import React, { useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Sparkles, ArrowUpRight, Copy, Check, LoaderCircle } from 'lucide-react'
+import { ArrowUpRight, Copy, Check, LoaderCircle } from 'lucide-react'
 import './styles.css'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+
+const DEMO_PRESETS = {
+  duolingo: {
+    brand_name: 'Duolingo',
+    industry: 'EdTech / Language Learning',
+    campaign_objective: 'Boost daily app opens and streak retention',
+    product_details: 'Bite-sized free language lessons with streak tracking, gamified rewards, and a famously persistent owl mascot Duo.',
+  },
+  apple: {
+    brand_name: 'Apple',
+    industry: 'Consumer Tech / Laptops',
+    campaign_objective: 'Highlight power, 18+ hr battery life, and sleek design for MacBook Air M3',
+    product_details: 'MacBook Air powered by the M3 chip, featuring an ultra-thin aluminum unibody, fanless silent design, and up to 18 hours of battery life.',
+  },
+}
 
 const categoryStyle = {
   Engaging: 'bg-blue-100 text-blue-900 ring-blue-300',
@@ -25,56 +40,6 @@ function App() {
   const [copied, setCopied] = useState(null)
 
   const update = (key, val) => setForm((prev) => ({ ...prev, [key]: val }))
-
-  // 1. Define demo presets outside your component:
-const DEMO_PRESETS = {
-  duolingo: {
-    brand_name: 'Duolingo',
-    industry: 'EdTech / Language Learning',
-    campaign_objective: 'Boost daily app opens and streak retention',
-    product_details: 'Bite-sized free language lessons with streak tracking, gamified rewards, and a famously persistent owl mascot Duo.',
-  },
-  apple: {
-    brand_name: 'Apple',
-    industry: 'Consumer Tech / Laptops',
-    campaign_objective: 'Highlight power, 18+ hr battery life, and sleek design for MacBook Air M3',
-    product_details: 'MacBook Air powered by the M3 chip, featuring an ultra-thin aluminum unibody, fanless silent design, and up to 18 hours of battery life.',
-  },
-}
-
-// 2. Add preset buttons inside your form JSX (just above the fields):
-<form
-  onSubmit={generate}
-  className="rounded-[2rem] border border-blue-800/80 bg-white p-6 text-slate-950 shadow-2xl shadow-blue-950/80 sm:p-8"
->
-  <div className="mb-7 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-    <div>
-      <h2 className="text-2xl font-black tracking-tight text-slate-950">
-        Tell us about your brand
-      </h2>
-      <p className="mt-1 text-sm font-medium text-slate-500">
-        We’ll find the voice and write the drafts.
-      </p>
-    </div>
-
-    {/* Quick Demo Preset Buttons */}
-    <div className="flex gap-2">
-      <button
-        type="button"
-        onClick={() => setForm(DEMO_PRESETS.duolingo)}
-        className="rounded-lg border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition"
-      >
-        ⚡ Demo: Duolingo
-      </button>
-      <button
-        type="button"
-        onClick={() => setForm(DEMO_PRESETS.apple)}
-        className="rounded-lg border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition"
-      >
-        ⚡ Demo: Apple
-      </button>
-    </div>
-  </div>
 
   const generate = async (e) => {
     e.preventDefault()
@@ -107,14 +72,11 @@ const DEMO_PRESETS = {
 
   return (
     <main className="min-h-screen bg-blue-950 text-white selection:bg-blue-500 selection:text-white">
-      {/* Header / Navbar */}
+      {/* Header / Navbar (Logo Removed) */}
       <nav className="mx-auto flex max-w-7xl items-center justify-between border-b border-blue-900/60 bg-blue-950/80 px-6 py-5 backdrop-blur-md">
-        <a href="/" className="flex items-center gap-2.5 text-xl font-black tracking-tight text-white">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-600/30">
-            <Sparkles size={20} />
-          </span>
+        <span className="text-xl font-black tracking-tight text-white">
           Draftly
-        </a>
+        </span>
         <span className="hidden rounded-full border border-blue-800 bg-blue-900/50 px-4 py-1.5 text-xs font-semibold text-blue-200 sm:block">
           Built for sharper social
         </span>
@@ -122,7 +84,6 @@ const DEMO_PRESETS = {
 
       {/* Main Section */}
       <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-10 lg:grid-cols-[0.88fr_1.12fr] lg:pt-16">
-        {/* Left Column - Hero Branding */}
         <div className="max-w-xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-blue-400">
             Your social sidekick
@@ -141,18 +102,38 @@ const DEMO_PRESETS = {
           </div>
         </div>
 
-        {/* Right Column - Brief Input Form */}
+        {/* Brief Input Form */}
         <form
           onSubmit={generate}
           className="rounded-[2rem] border border-blue-800/80 bg-white p-6 text-slate-950 shadow-2xl shadow-blue-950/80 sm:p-8"
         >
-          <div className="mb-7">
-            <h2 className="text-2xl font-black tracking-tight text-slate-950">
-              Tell us about your brand
-            </h2>
-            <p className="mt-1 text-sm font-medium text-slate-500">
-              We’ll find the voice and write the drafts.
-            </p>
+          <div className="mb-7 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="text-2xl font-black tracking-tight text-slate-950">
+                Tell us about your brand
+              </h2>
+              <p className="mt-1 text-sm font-medium text-slate-500">
+                We’ll find the voice and write the drafts.
+              </p>
+            </div>
+
+            {/* Quick Demo Preset Buttons */}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setForm(DEMO_PRESETS.duolingo)}
+                className="rounded-lg border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition"
+              >
+                ⚡ Demo: Duolingo
+              </button>
+              <button
+                type="button"
+                onClick={() => setForm(DEMO_PRESETS.apple)}
+                className="rounded-lg border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition"
+              >
+                ⚡ Demo: Apple
+              </button>
+            </div>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2">
